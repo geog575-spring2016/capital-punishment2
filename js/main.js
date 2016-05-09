@@ -99,7 +99,7 @@ function setMap() {
 
 //set the projection for the US, equal area because choropeth
     projection = d3.geo.albers()
-        .scale(1000)
+        .scale(1300)
         .translate([mapWidth / 2, mapHeight / 2]);
         //path to draw the map
     path = d3.geo.path()
@@ -202,8 +202,7 @@ function implementState(csvData, json, data) {
         .attr("d", function(d) {
             return path(d);
         })
-        .on("mouseover", highlight)
-        .on("mouseout", dehighlight);
+
 
     var statesColor = states.append("desc")
         .text(function(d) {
@@ -236,6 +235,8 @@ function setSymb (path, map, projection, data){
             return projection([d.Longitude, d.Latitude])[1]; 
         });
 
+
+
         // set parameter true to deactivate script
         setSymb = true;
 
@@ -244,6 +245,7 @@ function setSymb (path, map, projection, data){
 };
 
 function updateSymb(data) {
+
 
     // create array to store all values for 
     var domainArray = [];
@@ -304,7 +306,7 @@ function updateSymb(data) {
 //vcr controls click events
 function animateMap(yearExpressed, colorize, yearExpressedText, data){
     //step backward functionality
-    $(".step-backward").click(function(){
+    $(".stepBackward").click(function(){
         if (yearExpressed <= yearArray[yearArray.length-1] && yearExpressed > yearArray[0]){
             yearExpressed--;
             changeAttribute(yearExpressed, colorize);
@@ -326,7 +328,7 @@ function animateMap(yearExpressed, colorize, yearExpressedText, data){
         changeAttribute(yearExpressed, colorize);
     });
     //step forward 
-    $(".step-forward").click(function(){
+    $(".stepForward").click(function(){
         if (yearExpressed < yearArray[yearArray.length-1]){
             yearExpressed++;
             changeAttribute(yearExpressed, colorize);

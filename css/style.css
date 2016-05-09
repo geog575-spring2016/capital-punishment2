@@ -9,39 +9,32 @@
     margin-left: 15%;
 }
 
+.map {
+    background-color: none;
+    margin-right: 20%;
+    padding-left: 3%;
+}
+
 .states {
     stroke: #D3D3D3;
     stroke-width: 0.5px;
-}
-
-#play {
-  background: grey;
-  font-size: 30px;
-  color: white;
-  width: 150px;
-}
-
-#forward {
-  background: grey;
-  font-size: 30px;
-  color: white;
-  width: 150px;
+    float: left;
 }
 
 #clock {
-  left: 100px;
   color: #800000;
-  font-size: 30px;
+  font-size: 60px;
+  margin: 30px;
 }
 
 p2{
-  float:right;
+  float:bottom;
   width: 90%;
   font-size: 12pt;
 }
 
 .info{
-  margin-top: 200px;
+  margin-top: 700px;
   box-sizing: content-box;
   position:absolute;
   width: 1200px;
@@ -49,8 +42,8 @@ p2{
 
 .page-header {
     margin-top: 0px;
-    height: 10%;
 }
+
 
 .main-menu {
     position: absolute;
@@ -94,13 +87,6 @@ rect {
     background: none;
 }
 
-.yearExpressedText {
-    padding-right: 115px;
-    font-family: 'Roboto Slab', sans-serif;
-    top: 10px;
-
-}
-
 .menu-inset {
     float: right;
     border-style: none;
@@ -128,7 +114,7 @@ rect {
    font-weight:bold;
    font-size:20px;
    line-height:24px;
-   background-color: white;
+   background-color: yellow;
    color:grey;
    width:200px;
    padding:10px;
@@ -142,34 +128,167 @@ rect {
     font-weight:normal;
     line-height: 20px;
 }
+/*  navbar CSS */
+/*  ------ */
+#custom-bootstrap-menu.navbar-custom .navbar-brand {
+    color: white;
+    font-size: 45pt;
+    font-style: italic;
+}
+#custom-bootstrap-menu.navbar-custom {
+    font-size: 16px;
+    background-color: red;
+    border-style: solid;
+    border-color: black;
+    border-bottom-width: 2px;
+    font-family: Candara, sans-serif;
+}
+#custom-bootstrap-menu.navbar-custom .navbar-nav>li>a {
+    color: black;
+    background-color: white;
+}
+#custom-bootstrap-menu.navbar-custom .navbar-nav>li>a:hover,
+#custom-bootstrap-menu.navbar-custom .navbar-nav>li>a:focus {
+    color: black;
+    background-color: white
+}
+#custom-bootstrap-menu.navbar-custom .navbar-nav>.active>a,
+#custom-bootstrap-menu.navbar-custom .navbar-nav>.active>a:hover,
+#custom-bootstrap-menu.navbar-custom .navbar-nav>.active>a:focus {
+    color: black;
+    background-color: white;
+}
+#custom-bootstrap-menu.navbar-custom .navbar-toggle {
+    border-color: red;
+}
+#custom-bootstrap-menu.navbar-custom .navbar-toggle:hover,
+#custom-bootstrap-menu.navbar-custom .navbar-toggle:focus {
+    background-color: orange;
+}
+#custom-bootstrap-menu.navbar-custom .navbar-toggle .icon-bar {
+    background-color: blue;
+}
+#custom-bootstrap-menu.navbar-custom .navbar-toggle:hover .icon-bar,
+#custom-bootstrap-menu.navbar-custom .navbar-toggle:focus .icon-bar {
+    background-color: pink;
+}
 
 .well {
-  font-size: 24px;
+    padding: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+    color: grey; 
+    background-color:  white;
 }
 
 
-
-
-/*bar chart*/
-.bar {
-  fill: steelblue;
+/*  Menu CSS */
+/*  ------ */
+.main-menu { 
+    position: absolute;
+    margin-left: 0% !important;
+    color: #969696;
 }
 
-.bar:hover {
-  fill: brown;
+.menu-options {
+    float: left;
+    background-color:  #e1e1e1;
+    cursor: pointer;
+    font-family: Open Sans, sans-serif;
 }
 
-.axis {
-  font: 10px sans-serif;
+.menu-inset {
+    float: left;
+    border-style: none;
 }
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+
+.title {
+    font-family: Times, sans-serif;
 }
 
-.x.axis path {
-  display: none;
+/* sequence buttons*/
+/*  ------ */
+
+.sequence-buttons {
+  margin: 20px;
+
+}
+
+.button {
+    padding-right: 0%;
+    float: left;
+    height:50px;
+    width: 1100px;
+}
+
+
+/* Overview CSS  */
+/* ------------  */
+
+#background {
+    padding-top:0px;
+}
+
+.background{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+#cite p{
+    font-size: 10px;
+}
+
+/* About CSS  */
+/* ---------  */
+.about {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* HTML General CSS  */
+/* ----------------  */
+
+p {
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    font-size: 36px;
+    font-family: Times, serif;
+}
+
+h2 {
+    
+    font-family: Times, serif;
+}
+
+h3 {
+    font-family: Times, serif;
+}
+
+body { 
+    padding-top: 50px; 
+}
+
+a:link {
+    color: red;
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: purple;
+    text-decoration: underline;
+}
+
+a:active {
+    color: purple;
+    text-decoration: none;
 }
