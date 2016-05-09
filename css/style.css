@@ -10,7 +10,7 @@
 }
 
 .states {
-    stroke: black;
+    stroke: #D3D3D3;
     stroke-width: 0.5px;
 }
 
@@ -63,7 +63,7 @@ p2{
 rect {
   height: 40px;
   width: 40px;
-  stroke: grey;
+  stroke: #D3D3D3;
 }
 
 .menu-options {
@@ -109,7 +109,7 @@ rect {
 }
 
 .states {
-    stroke: grey;
+    stroke: #C0C0C0;
     stroke-width: 0.5px;
     float:left;
 }

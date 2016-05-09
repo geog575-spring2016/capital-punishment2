@@ -51,7 +51,7 @@ var yearExpressedText; //variable to store year expressed text
 var arrayLaw = [ "Legal",
                    "Illegal"];
 
-var colorArrayLaw  = ["#CCC","white"];
+var colorArrayLaw  = ["#DCDCDC","white"];
 //the map width is a function of window size
 var mapWidth = window.innerWidth * 0.7,
 mapHeight = 600;
@@ -304,7 +304,7 @@ function updateSymb(data) {
 //vcr controls click events
 function animateMap(yearExpressed, colorize, yearExpressedText, data){
     //step backward functionality
-    $(".stepBackward").click(function(){
+    $(".step-backward").click(function(){
         if (yearExpressed <= yearArray[yearArray.length-1] && yearExpressed > yearArray[0]){
             yearExpressed--;
             changeAttribute(yearExpressed, colorize);
@@ -326,7 +326,7 @@ function animateMap(yearExpressed, colorize, yearExpressedText, data){
         changeAttribute(yearExpressed, colorize);
     });
     //step forward 
-    $(".stepForward").click(function(){
+    $(".step-forward").click(function(){
         if (yearExpressed < yearArray[yearArray.length-1]){
             yearExpressed++;
             changeAttribute(yearExpressed, colorize);
