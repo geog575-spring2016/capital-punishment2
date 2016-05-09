@@ -51,7 +51,7 @@ var yearExpressedText; //variable to store year expressed text
 var arrayLaw = [ "Legal",
                    "Illegal"];
 
-var colorArrayLaw  = ["#D3D3D3","#696969"];
+var colorArrayLaw  = ["#CCC","white"];
 //the map width is a function of window size
 var mapWidth = window.innerWidth * 0.7,
 mapHeight = 600;
@@ -228,7 +228,7 @@ function setSymb (path, map, projection, data){
         .append("circle")
         .attr("class", function(d) {
             return "circles " + d.state; 
-        }).attr("fill", "grey")
+        }).attr("fill", "#800000")
         .attr('fill-opacity',0.75)
         .attr("cx", function(d) {
             return projection([d.Longitude, d.Latitude])[0]; 

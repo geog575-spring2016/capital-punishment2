@@ -63,10 +63,7 @@ p2{
 rect {
   height: 40px;
   width: 40px;
-}
-
-text {
-  style: bold;
+  stroke: grey;
 }
 
 .menu-options {
@@ -112,8 +109,7 @@ text {
 }
 
 .states {
-    fill: #808080;
-    stroke: #fff;
+    stroke: grey;
     stroke-width: 0.5px;
     float:left;
 }
