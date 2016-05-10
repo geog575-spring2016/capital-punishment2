@@ -1,23 +1,10 @@
 //bugs/issues to deal with:
 //1) determine how to label states separately (because now we're using the unique field = no spaces)
-//2) cycle over time (default to 2015 on load, on play, start at 1977 and sequence forward)- NATALEE
-//3) create proportional symbols (raw data for # executions per state in each year) = KAI & GABY
-//4) Add contextual information - KAI
-//5) Add pause/forward/back buttons - NATALEE
-
-
-//NOTES FROM PRESENTATION
-//1) let's clarify what we want to communicate with this map. are we pro, against, or attempting to be unbiased?
-//2) once we clarify our stance, let's decide on a color scheme. think about what is rising to figure! 
-//3) play/forward buttons are confusing, let's use visual affordances rather than words (or are words ok to keep?)
-/////and we need to figure out to have only a play button at load, then forward/back when the map is in motion
-//4) a reset/home button?
-//5) why didn't our map appear? figure out what's going on with how it's showing up in different browsers. 
-////firefox works for kai, chrome works for me
-//6) cartography focus: normalization
-//7) think about our default view
-//8) assign someone to do the styling and UI (consistent aesthetic style)
-
+//2) Get prop symbols to cycle through time using the play button
+//3) Get highlight/dehighlight to work on prop symbols
+//4) On highlight, show information box for each state
+//5) Get empty circles to show up on states with legal death penalty but no executions
+//6) It's a little monochromatic -- let's find a nice complementary color to the red
 
 //****GLOBAL VARIABLES****//
 var topicArray = ["Law",
@@ -43,7 +30,6 @@ This variable is key and controls all values later on throughout
 // special attention here
 
 ************************************************************** */
-var dataEXP = 1997;
 
 
 var yearExpressedText; //variable to store year expressed text
@@ -259,7 +245,6 @@ function updateSymb(data) {
     console.log(selYear);
 
     console.log("TEST - 02")
-    console.log(dataEXP);
     console.log("TEST - 03");
     console.log(selYear);
 
