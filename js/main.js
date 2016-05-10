@@ -57,7 +57,7 @@ var yearExpressed;
 var circles; // variable holding circle objects
 var symbolSet = false; // variable activating function
 
-// Global variable storing data file 
+// Global variable storing data file
 var file;
 
 /* *** START PROGRAM *** */
@@ -105,7 +105,7 @@ function setMap() {
 //accepts errors from queue function as first argument
 
 function callback(error, Law, allExecutions, continentalUS){
-    
+
     console.log(Law);
     //variable to store the continentalUS json with all attribute data
     joinedJson = topojson.feature(continentalUS, continentalUS.objects.states).features;
@@ -169,7 +169,7 @@ function joinData(topojson, csvData, attribute, json){
             };
         };
      };
-    d3.select('#play').html(yearArray[yearExpressed]); 
+    d3.select('#play').html(yearArray[yearExpressed]);
 
 };
 
@@ -211,13 +211,13 @@ function setSymb (path, map, projection, data){
         .enter()
         .append("circle")
         .attr("class", function(d) {
-            return "circles " + d.state; 
+            return "circles " + d.state;
         }).attr("fill", "#800000")
         .attr('fill-opacity',0.5)
         .attr("cx", function(d) {
-            return projection([d.Longitude, d.Latitude])[0]; 
-        }).attr("cy", function(d) { 
-            return projection([d.Longitude, d.Latitude])[1]; 
+            return projection([d.Longitude, d.Latitude])[0];
+        }).attr("cy", function(d) {
+            return projection([d.Longitude, d.Latitude])[1];
         });
 
 
@@ -230,7 +230,7 @@ function setSymb (path, map, projection, data){
 
 function updateSymb(data) {
 
-    // create array to store all values for 
+    // create array to store all values for
     var domainArray = [];
     var selYear = yearExpressed;
     // typecasting number to string to access column in dataset
@@ -277,22 +277,9 @@ function animateMap(yearExpressed, colorize, yearExpressedText, data){
         } else {
             yearExpressed = yearArray[yearArray.length-1];
             changeAttribute(yearExpressed, colorize);
-        }; 
+        };
     });
-    //play 
-    $(".play").click(function(){
-        timer.play();
-        //insert code to make prop symbols ++
-        $('.play').prop('disabled', false);
-    });
-    //pause 
-    $(".pause").click(function(){
-        timer.pause();
-        $('.play').prop('disabled', false);
-        //add code to make prop symbols stop
-        changeAttribute(yearExpressed, colorize);
-    });
-    //step forward 
+    //step forward
     $(".stepForward").click(function(){
         if (yearExpressed < yearArray[yearArray.length-1]){
             yearExpressed++;
@@ -301,7 +288,7 @@ function animateMap(yearExpressed, colorize, yearExpressedText, data){
         } else {
             yearExpressed = yearArray[0];
             changeAttribute(yearExpressed, colorize);
-        }; 
+        };
     });
 }; //end animatemap
 
@@ -310,7 +297,7 @@ function animateMap(yearExpressed, colorize, yearExpressedText, data){
 function timeMapSequence(yr) {
     changeAttribute(yearExpressed, colorize);
     if (yr < yearArray[yearArray.length-1]){
-        yearExpressed++; 
+        yearExpressed++;
     };
 }; //end timeMapSequence
 
@@ -521,7 +508,7 @@ var timer = $.timer(function() {
             yearExpressed = yearArray[0];
         };
         animateMap(yearExpressed, colorize, yearExpressedText);
-        timeMapSequence(yearExpressed);  
+        timeMapSequence(yearExpressed);
     });
 timer.set({ time : 800, autostart : false });
 
