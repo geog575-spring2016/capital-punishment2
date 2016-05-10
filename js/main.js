@@ -84,7 +84,7 @@ function setMap() {
         .attr("height", mapHeight);
 
 //set the projection for the US, equal area because choropeth
-    projection = d3.geo.albers()
+    projection = d3.geo.albersUsa()
         .scale(1300)
         .translate([mapWidth / 2, mapHeight / 2]);
         //path to draw the map
@@ -189,8 +189,6 @@ function implementState(csvData, json, data) {
             return path(d);
         })
 
-
-
     var statesColor = states.append("desc")
         .text(function(d) {
             return choropleth(d, colorize);
@@ -199,23 +197,23 @@ function implementState(csvData, json, data) {
 
         changeAttribute(yearExpressed, colorize);
         mapSequence(yearExpressed);  // update the representation of the map
+
 };
 
 // Create proportional symbols to display all execution data for expressed year
 function setSymb (path, map, projection, data){
 
-    console.log("setSymb function");
-
     if (!symbolSet) {
-        console.log("function activated");
      circles = map.selectAll(".circles")
+        .on("mouseover", highlight)
+        .on("mouseout", dehighlight)
         .data(data)
         .enter()
         .append("circle")
         .attr("class", function(d) {
             return "circles " + d.state; 
         }).attr("fill", "#800000")
-        .attr('fill-opacity',0.75)
+        .attr('fill-opacity',0.5)
         .attr("cx", function(d) {
             return projection([d.Longitude, d.Latitude])[0]; 
         }).attr("cy", function(d) { 
@@ -223,55 +221,33 @@ function setSymb (path, map, projection, data){
         });
 
 
-
         // set parameter true to deactivate script
         setSymb = true;
 
     }
     updateSymb(data);
-    highlightCircles(data);
 };
 
 function updateSymb(data) {
 
-
     // create array to store all values for 
     var domainArray = [];
-
-    /* *** ALL TESTING BOX *** */
-    console.log("TEST - 01");
-
     var selYear = yearExpressed;
-    console.log(selYear);
-
-    console.log("TEST - 02")
-    console.log("TEST - 03");
-    console.log(selYear);
-
     // typecasting number to string to access column in dataset
     selYear = '' + selYear;
     console.log(selYear);
     /* *** TESTING BOX END *** */
-
     for (var i=0; i<data.length; i++) {
-
         var val = parseFloat(data[i][selYear]);
-
         console.log(val);
-
         domainArray.push(val);
     };
-
-
-    console.log(domainArray);
 
         var radiusMin = Math.min.apply(Math, domainArray);
         var radiusMax = Math.max.apply(Math, domainArray);
 
-    console.log(radiusMax);
-
     var setRadius = d3.scale.sqrt()
-        .range([0, 40])
+        .range([0, 60])
         .domain([radiusMin, radiusMax]);
 
     //create a second svg element to hold the bar chart
@@ -306,12 +282,14 @@ function animateMap(yearExpressed, colorize, yearExpressedText, data){
     //play 
     $(".play").click(function(){
         timer.play();
+        //insert code to make prop symbols ++
         $('.play').prop('disabled', false);
     });
     //pause 
     $(".pause").click(function(){
         timer.pause();
         $('.play').prop('disabled', false);
+        //add code to make prop symbols stop
         changeAttribute(yearExpressed, colorize);
     });
     //step forward 
@@ -465,11 +443,43 @@ var data = d.properties ? d.properties[expressed] : d;
 return colorScale(data);
 };
 
+
+function highlight(data) {
+    //this is a conditional statement, holds the currently highlighted feature
+    var feature = data.properties ? data.properties : data.feature.properties;
+    d3.selectAll("."+feature.abrev)
+        .style("fill", "pink");
+
+    //set the state name as the label title
+    var labelName = feature.abrev;
+    var labelAttribute;
+    //set up the text for the dynamic labels for the map
+    //labels should match the yearExpressed and the state of the law during that year
+    if (expressed == "Law") {
+        labelAttribute = yearExpressed+" legal Status: "+feature[expressed][Number(yearExpressed)];
+    } else if (expressed == "allExecutions") {
+        labelAttribute = yearExpressed+" number of executions: "+feature[expressed][Number(yearExpressed)];
+    }
+    var retrievelabel = d3.select(".map")
+        .append("div")
+        .attr("class", "retrievelabel")
+        .attr("id",feature.abrev+"label")
+
+    var labelTitle = d3.select(".retrievelabel")
+        .html(labelName)
+        .attr("class", "labelTitle");
+
+    var labelAttribute = d3.select(".labelTitle")
+        .append("div")
+        .html(labelAttribute)
+        .attr("class", "labelAttribute")
+};
+
 function dehighlight(data) {
     var feature = data.properties ? data.properties : data.feature.properties;
     var deselect = d3.selectAll("#"+feature.abrev+"label").remove();
 
-    //dehighlighting the states
+    //dehighlighting the circles
     var selection = d3.selectAll("."+feature.abrev)
         .filter(".circles");
     var fillColor = selection.select("desc").text();
