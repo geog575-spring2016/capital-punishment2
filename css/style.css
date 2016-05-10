@@ -1,5 +1,6 @@
 /******MAP STYLING******/
-
+/*font-family: 'Montserrat', sans-serif;
+font-family: 'Droid Serif', serif;*/
 
 #mainmap {
     background: none;
@@ -24,12 +25,12 @@
 
 #clock {
   color: #800000;
-  font-size: 100px;
-  margin: 30px;
   font-style: bold;
+  size: 100pt;
+  height: 100px;
 }
 
-p2{
+p2 {
   float:bottom;
   width: 90%;
   font-size: 12pt;
@@ -73,16 +74,8 @@ rect {
 .overlay-menu {
     margin-top: 325px;
     font-size: 12px;
-    font-family: Open Sans, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     cursor: pointer;
-}
-
-.menuBox {
-    width: 100%;
-    float: left;
-    padding-bottom: 1%;
-    margin-bottom: 100%;
-    background: none;
 }
 
 .menu-inset {
@@ -92,13 +85,11 @@ rect {
     border color: none;
 }
 
-
 .states {
     stroke: #C0C0C0;
     stroke-width: 0.5px;
     float:left;
 }
-
 
 .infoLabel {
     position: absolute;
@@ -109,7 +100,7 @@ rect {
 }
 
 .labelTitle {
-   font-family: Candara;
+   font-family: 'Montserrat', sans-serif;
    font-weight:bold;
    font-size:20px;
    line-height:24px;
@@ -122,61 +113,22 @@ rect {
 }
 
 .labelAttribute {
-    font-family: Candara;
+    font-family: 'Montserrat', sans-serif;
     font-size:16px;
     font-weight:normal;
     line-height: 20px;
 }
-/*  navbar CSS */
-/*  ------ */
-#custom-bootstrap-menu.navbar-custom .navbar-brand {
-    color: white;
-    font-size: 45pt;
-    font-style: italic;
-}
-#custom-bootstrap-menu.navbar-custom {
-    font-size: 16px;
-    background-color: red;
-    border-style: solid;
-    border-color: black;
-    border-bottom-width: 2px;
-    font-family: Candara, sans-serif;
-}
-#custom-bootstrap-menu.navbar-custom .navbar-nav>li>a {
-    color: grey;
-    background-color: #800000;
-}
+
 #custom-bootstrap-menu.navbar-custom .navbar-nav>li>a:hover,
 #custom-bootstrap-menu.navbar-custom .navbar-nav>li>a:focus {
-    color: grey;
-    background-color: #800000;
+    color: white;
+    background-color: #1f7676;
 }
-#custom-bootstrap-menu.navbar-custom .navbar-nav>.active>a,
-#custom-bootstrap-menu.navbar-custom .navbar-nav>.active>a:hover,
-#custom-bootstrap-menu.navbar-custom .navbar-nav>.active>a:focus {
-    color: grey;
-    background-color: #800000;
-}
-#custom-bootstrap-menu.navbar-custom .navbar-toggle {
-    border-color: red;
-}
-#custom-bootstrap-menu.navbar-custom .navbar-toggle:hover,
-#custom-bootstrap-menu.navbar-custom .navbar-toggle:focus {
-    background-color: grey;
-}
-#custom-bootstrap-menu.navbar-custom .navbar-toggle .icon-bar {
-    background-color: grey;
-}
-#custom-bootstrap-menu.navbar-custom .navbar-toggle:hover .icon-bar,
-#custom-bootstrap-menu.navbar-custom .navbar-toggle:focus .icon-bar {
-    background-color: pink;
-}
-
 .well {
     padding: 20px;
     padding-left: 60px;
     padding-right: 60px;
-    color: white; 
+    color: white;
     background-color:  grey;
 }
 
@@ -184,7 +136,7 @@ rect {
 
 /*  Menu CSS */
 /*  ------ */
-.main-menu { 
+.main-menu {
     margin-left: 12% !important;
     font-size: 20pt;
 }
@@ -197,7 +149,7 @@ rect {
 /*controls the legend text, but can't change size for some reason
 */
 .title {
-    font-family: Candara;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* sequence buttons*/
@@ -253,19 +205,19 @@ color: grey;
 }
 .stepForward {
 width: 80pt;
-background: white;
+background: #CCC;
 border: none;
-color: grey;
+color: #1F7676;
 }
 .stepBackward {
 width: 80pt;
-background: white;
+background: #CCC;
 border: none;
-color: grey;
+color: #1F7676;
 }
 
 
-#cite p{
+#sources p{
     font-size: 12px;
     font-color: grey;
 }
@@ -280,44 +232,50 @@ color: grey;
 /* HTML General CSS  */
 /* ----------------  */
 
+strong {
+  font-size: 16pt;
+  font-family: 'Droid Serif', serif;
+
+}
+
+
 p {
     font-size: 16px;
-    font-family: Times, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 h1 {
     font-size: 36px;
-    font-family: Times, serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 h2 {
-    
-    font-family: Times, serif;
+
+    font-family: 'Montserrat', sans-serif;
 }
 
 h3 {
-    font-family: Times, serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
-body { 
-    padding-top: 50px; 
+body {
+    padding-top: 50px;
 }
 
 a:link {
-    color: red;
-    text-decoration: none;
+    color: #1f7676;
 }
 
 a:visited {
-    color: red;
-    text-decoration: none;
+    color: #1f7676 ;
+
 }
 
 a:hover {
-    color: red;
+    color: grey;
 }
 
 a:active {
-    color: red;
+    color: white;
     text-decoration: none;
 }
