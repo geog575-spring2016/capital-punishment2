@@ -113,7 +113,7 @@ function setMap() {
         .defer(d3.json, "../data/continentalUS.topojson") //geometries
         .await(callback);
 
-}; //setmap is bye
+}; //setmap is done
 
 //retrieve and process json file and data, same order as the queue function to load data
 //accepts errors from queue function as first argument
@@ -405,16 +405,14 @@ function timeMapSequence(yearsExpressed) {
 
 
 
-    //creates the menu items
+    //creates the legend
     function createMenu(arrayX, arrayY, title, infotext, infolink) {
         var yArray = [40, 85, 130, 175, 220, 265];
-        var oldItems = d3.selectAll(".menuBox").remove();
-        var oldItems2 = d3.selectAll(".menuInfoBox").remove();
 
-        var title = "Legal Status:";
+        var title = "Legal Status of Capital Punishment:";
 
         //creates menu boxes
-        menuBox = d3.select(".menu-inset")
+        menuBox = d3.select(".menu-info")
                 .append("svg")
                 .attr("width", menuWidth)
                 .attr("height", menuHeight)
@@ -518,7 +516,7 @@ function highlight(data) {
     //this is a conditional statement, holds the currently highlighted feature
     var feature = data.properties ? data.properties : data.feature.properties;
     d3.selectAll("."+feature.abrev)
-        .style("fill", "#800000");
+        .style("fill", "pink");
 
     //set the state name as the label title
     var labelName = feature.abrev;
@@ -552,7 +550,7 @@ function dehighlight(data) {
 
     //dehighlighting the states
     var selection = d3.selectAll("."+feature.abrev)
-        .filter(".states");
+        .filter(".circles");
     var fillColor = selection.select("desc").text();
     selection.style("fill", fillColor);
 };
