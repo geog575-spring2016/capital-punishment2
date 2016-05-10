@@ -11,7 +11,7 @@ var topicArray = ["Law",
                   "allExecutions"]; //the first item in this array will be the default
 
 //array for year's
-var yearArray = ["1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995","1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"];
+var yearArray = ["1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995","1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"];
 
 //choropleth global variables
 var currentColors = []; //empty array to fill with corresponding colors
@@ -329,9 +329,9 @@ function animateMap(yearExpressed, colorize, yearExpressedText, data){
 
 
 //for play functionality
-function timeMapSequence(yearsExpressed) {
+function timeMapSequence(yr) {
     changeAttribute(yearExpressed, colorize);
-    if (yearsExpressed < yearArray[yearArray.length-1]){
+    if (yr < yearArray[yearArray.length-1]){
         yearExpressed++; 
     };
 }; //end timeMapSequence
@@ -364,29 +364,7 @@ function timeMapSequence(yearsExpressed) {
                 .text(function(d) {
                     return choropleth(d, colorize);
             });
-         //timeline stuff
 
-        var timelineYear = d3.select(".timeline")
-            .selectAll('g')
-            .attr("font-weight", function(d){
-                if (year == d.getFullYear()){
-                    return "bold";
-                } else {
-                    return "normal";
-                }
-            }).attr("font-size", function(d){
-                if (year == d.getFullYear()){
-                    return "18px";
-                } else {
-                    return "12px";
-                }
-            }).attr("stroke", function(d){
-                if (year == d.getFullYear()){
-                    return "orange";
-                } else {
-                    return "blue";
-                }
-              });
          drawMenuInfo(colorize, year);
     }; //end of changeAttribute
 
@@ -406,12 +384,11 @@ function timeMapSequence(yearsExpressed) {
                 .attr("class", "menuBox");
 
         //creates Menu Title
-        var menuTitle = menuBox.append("text")
-            .attr("x", 10)
+        var legendTitle = menuBox.append("text")
+            .attr("x", 5)
             .attr("y", 30)
-            .attr("class","title")
+            .attr("class","legendTitle")
             .text(title)
-            .style("font-size", '16px');
 
         //draws and shades boxes for menu
         for (b = 0; b < arrayX.length; b++){
@@ -419,36 +396,30 @@ function timeMapSequence(yearsExpressed) {
                 .data(arrayX)
                 .enter()
                 .append("rect")
-                .attr("class", "items")
-                .attr("width", 35)
-                .attr("height", 35)
-                .attr("x", 15);
 
             menuItems.data(yArray)
                 .attr("y", function(d, i){
                     return d;
                 });
-
+                //fills legend boxes with choropleth colors
             menuItems.data(arrayY)
                 .attr("fill", function(d, i){
                     return arrayY[i];
                 });
         };
-        //creates menulabels
-        var menuLabels = menuBox.selectAll(".menuLabels")
+        //creates legendLabels
+        var legendLabels = menuBox.selectAll(".legendLabels")
             .data(arrayX)
             .enter()
             .append("text")
-            .attr("class", "menuLabels")
+            .attr("class", "legendLabels")
             .attr("x", 60)
             .text(function(d, i){
                 for (var c = 0; c < arrayX.length; c++){
                     return arrayX[i]
                 }
             })
-            .style({'font-size': '14px', 'font-family': 'Open Sans, sans-serif'});
-
-            menuLabels.data(yArray)
+            legendLabels.data(yArray)
                 .attr("y", function(d, i){
                     return d + 30;
                 });
@@ -494,27 +465,6 @@ var data = d.properties ? d.properties[expressed] : d;
 return colorScale(data);
 };
 
-function highlightCircles(data) {
-
-    var retrievelabel = d3.select(".circles")
-        .append("div")
-        .attr("class", "retrievelabel")
-        .attr("circles")
-
-    var labelTitle = d3.select(".retrievelabel")
-        .attr("class", "labelTitle");
-
-    var labelAttribute = d3.select(".labelTitle")
-        .append("div")
-        .html(labelAttribute)
-        .attr("class", "labelAttribute")
-
-                .on("mouseover", highlightCircles)
-        .on("mouseout", dehighlight);
-};
-
-
-//both map/chart dehighlight
 function dehighlight(data) {
     var feature = data.properties ? data.properties : data.feature.properties;
     var deselect = d3.selectAll("#"+feature.abrev+"label").remove();
