@@ -204,6 +204,7 @@ function implementState(csvData, json, data) {
         })
 
 
+
     var statesColor = states.append("desc")
         .text(function(d) {
             return choropleth(d, colorize);
@@ -242,6 +243,7 @@ function setSymb (path, map, projection, data){
 
     }
     updateSymb(data);
+    highlightCircles(data);
 };
 
 function updateSymb(data) {
@@ -507,41 +509,25 @@ var data = d.properties ? d.properties[expressed] : d;
 return colorScale(data);
 };
 
-function choroplethChart(d, colorize) {
-    return colorScaleChart(d);
-};
+function highlightCircles(data) {
 
-
-function highlight(data) {
-    //this is a conditional statement, holds the currently highlighted feature
-    var feature = data.properties ? data.properties : data.feature.properties;
-    d3.selectAll("."+feature.abrev)
-        .style("fill", "pink");
-
-    //set the state name as the label title
-    var labelName = feature.abrev;
-    var labelAttribute;
-    //set up the text for the dynamic labels for the map
-    //labels should match the yearExpressed and the state of the law during that year
-    if (expressed == "Law") {
-        labelAttribute = yearExpressed+" legal Status: "+feature[expressed][Number(yearExpressed)];
-    } else if (expressed == "allExecutions") {
-        labelAttribute = yearExpressed+" number of executions: "+feature[expressed][Number(yearExpressed)];
-    }
-    var retrievelabel = d3.select(".map")
+    var retrievelabel = d3.select(".circles")
         .append("div")
         .attr("class", "retrievelabel")
-        .attr("id",feature.abrev+"label")
+        .attr("circles")
 
     var labelTitle = d3.select(".retrievelabel")
-        .html(labelName)
         .attr("class", "labelTitle");
 
     var labelAttribute = d3.select(".labelTitle")
         .append("div")
         .html(labelAttribute)
         .attr("class", "labelAttribute")
+
+                .on("mouseover", highlightCircles)
+        .on("mouseout", dehighlight);
 };
+
 
 //both map/chart dehighlight
 function dehighlight(data) {
