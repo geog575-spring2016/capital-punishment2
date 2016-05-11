@@ -2,6 +2,25 @@
 /*font-family: 'Montserrat', sans-serif;
 font-family: 'Droid Serif', serif;*/
 
+#info {
+  height: 200px;
+  width: 300px;
+  z-index: 2;
+  background: blue;
+  border: 1px solid black;
+  float: right;
+  top: 100px;
+}
+
+
+.retrieveLabel {
+    position: absolute;
+    float:left;
+    display:inline-block;
+    background: red;
+}
+
+
 #mainmap {
     background: none;
     margin: 0px;
@@ -78,12 +97,6 @@ rect {
     float:left;
 }
 
-.retrieveLabel {
-    position: absolute;
-    float:left;
-    display:inline-block;
-    background: red;
-}
 
 .labelTitle {
    font-family: 'Montserrat', sans-serif;

@@ -39,6 +39,7 @@ var symbolSet = false; // variable activating function
 // Global variable storing data file
 var file;
 
+
 /* *** START PROGRAM *** */
 
 //when window loads, initiate map
@@ -165,15 +166,15 @@ function implementState(csvData, json, data) {
             return path(d);
         })
 
+                .on("mouseover", highlight)
+        .on("mouseout", dehighlight);
+
     var statesColor = states.append("desc")
         .text(function(d) {
             return choropleth(d, colorize);
-
         })
-
         changeAttribute(yearExpressed, colorize);
         mapSequence(yearExpressed);  // update the representation of the map
-
 };
 
 // Create proportional symbols to display all execution data for expressed year
@@ -187,12 +188,13 @@ function setSymb (path, map, projection, data){
         .attr("class", function(d) {
             return "circles " + d.state;
         }).attr("fill", "#800000")
-        .attr('fill-opacity',0.4)
+        .attr('fill-opacity',0.6)
         .attr("cx", function(d) {
             return projection([d.Longitude, d.Latitude])[0];
         }).attr("cy", function(d) {
             return projection([d.Longitude, d.Latitude])[1];
         }).on("mouseover", function(d) {
+            retrievelabel(data);
             // event listener, highlight bubbles
             d3.select(this).attr("fill", '#1F7676');
         }).on("mouseout", function() {
@@ -205,6 +207,9 @@ function setSymb (path, map, projection, data){
     updateSymb(data);
 };
 
+function retrievelabel(data) {
+    console.log("this is where kai's code for the tooltip goes");
+}
 
 function updateSymb(data) {
     // create array to store all values for
@@ -406,11 +411,13 @@ return colorScale(data);
 };
 
 
+
 function highlight(data) {
     //this is a conditional statement, holds the currently highlighted feature
     var feature = data.properties ? data.properties : data.feature.properties;
     d3.selectAll("."+feature.abrev)
-        .style("fill", "#1F7676");
+        .style("stroke", "#CCC");
+
     //set the state name as the label title
     var labelName = feature.abrev;
     var labelAttribute;
@@ -436,13 +443,36 @@ function highlight(data) {
         .attr("class", "labelAttribute")
 };
 
+
+
+//both map/chart dehighlight
 function dehighlight(data) {
     var feature = data.properties ? data.properties : data.feature.properties;
     var deselect = d3.selectAll("#"+feature.abrev+"label").remove();
 
-    //dehighlighting the circles
+    //dehighlighting the states
     var selection = d3.selectAll("."+feature.abrev)
-        .filter(".circles");
+        .filter(".states");
     var fillColor = selection.select("desc").text();
     selection.style("fill", fillColor);
+};
+
+function setLabel(props) {
+    //label content
+    var labelAttribute = "<h1>" + props[expressed] +
+        "</h1><b>" + expressed + "</b>";
+    //create info label div
+    var retrievelabel = d3.select("body")
+        .append("div")
+        .attr({
+            //set up class named retrievelabel to edit style
+            "class": "retrievelabel",
+            //use the attribute NAME to label the county
+            "id": props.abrev
+        })
+        .html(labelAttribute);
+
+    var stateName = retrievelabel.append("div")
+        .attr("class", "labelname")
+        .html(props.abrev);
 };
