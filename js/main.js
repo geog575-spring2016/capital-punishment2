@@ -103,9 +103,8 @@ function setMap() {
 //retrieve and process json file and data, same order as the queue function to load data
 //accepts errors from queue function as first argument
 
-function callback(error, Law, allExecutions, continentalUS){
+function callback(error, Law, allExecutions, continentalUS) {
 
-    console.log(Law);
     //variable to store the continentalUS json with all attribute data
     joinedJson = topojson.feature(continentalUS, continentalUS.objects.states).features;
 
@@ -135,7 +134,8 @@ function callback(error, Law, allExecutions, continentalUS){
 
 }; //callback end
 
-function joinData(topojson, csvData, attribute, json){
+function joinData(topojson, csvData, attribute, json) {
+
   //a variable that stores all the states
     var jsonStates = topojson.objects.states.geometries;
         for(var i=0; i<csvData.length; i++){
@@ -145,14 +145,14 @@ function joinData(topojson, csvData, attribute, json){
             var csvLink = csvState.abrev;
 
             //for each state in jsonStates, loop through and link it to the csv data
-            for(var a=0; a<jsonStates.length; a++){
+            for(var a=0; a<jsonStates.length; a++) {
                 //check if abrev = abrev, it will join
-                if (jsonStates[a].properties.abrev == csvLink){
+                if (jsonStates[a].properties.abrev == csvLink) {
                   //if this evaluates to true, join is working:
                     //attrObj holds all the attributes. so... many... informations
                     attrObj = {};
                     //loop to assign key/value pairs to json object
-                    for(var year in yearArray){
+                    for(var year in yearArray) {
                     //attr variable holds all years as separate objects
                         var attr = yearArray[year];
                         //val variable holds all the values for law and allExecutions
@@ -203,25 +203,28 @@ function implementState(csvData, json, data) {
 function setSymb (path, map, projection, data){
 
     if (!symbolSet) {
-     circles = map.selectAll(".circles")
-        .data(data)
-        .enter()
-        .append("circle")
-        .attr("class", function(d) {
-            return "circles " + d.state;
-        }).attr("fill", "#800000")
-        .attr('fill-opacity',0.5)
-        .attr("cx", function(d) {
-            return projection([d.Longitude, d.Latitude])[0];
-        }).attr("cy", function(d) {
-            return projection([d.Longitude, d.Latitude])[1];
-        }).on("mouseover", function(d) {
-            // event listener, highlight bubbles
-            d3.select(this).attr("fill", '#1F7676');
-        }).on("mouseout", function() {
-            // 
-            d3.select(this).attr("fill", '#800000');
-        })
+        circles = map.selectAll(".circles")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("class", function(d) {
+                return "circles " + d.state;
+            }).attr("fill", "#800000")
+            .attr('fill-opacity',0.5)
+            .attr("cx", function(d) {
+                return projection([d.Longitude, d.Latitude])[0];
+            }).attr("cy", function(d) {
+                return projection([d.Longitude, d.Latitude])[1];
+            }).on("mouseover", function(d) {
+                // event listener, highlight bubbles
+                d3.select(this).attr("fill", '#1F7676');
+
+                // display infobox with raw number
+                infoBox(data);
+            }).on("mouseout", function() {
+                // 
+                d3.select(this).attr("fill", '#800000');
+            })
 
 
         // set parameter true to deactivate script
@@ -236,13 +239,14 @@ function updateSymb(data) {
     // create array to store all values for
     var domainArray = [];
     var selYear = yearExpressed;
+
     // typecasting number to string to access column in dataset
     selYear = '' + selYear;
-    console.log(selYear);
-    /* *** TESTING BOX END *** */
+
+    // 
     for (var i=0; i<data.length; i++) {
         var val = parseFloat(data[i][selYear]);
-        console.log(val);
+        
         domainArray.push(val);
     };
 
@@ -254,23 +258,57 @@ function updateSymb(data) {
         .domain([radiusMin, radiusMax]);
 
     //create a second svg element to hold the bar chart
-    var circleRadius= circles.attr("r", function(d){
+    var circleRadius= circles.attr("r", function(d) {
             return setRadius(d[selYear]);
         });
 };
 
-    //creates dropdown menu
-    function drawMenuInfo(colorize, yearExpressed){
-        //creates year for map menu
-        yearExpressedText = d3.select('#clock')
-            .attr("x", 0)
-            .attr("y", 0)
-            .text(yearExpressed)
-            .style({'font-size':'36px', 'font-weight': 'strong'});
-    }; //done with drawMenuInfo
+function infoBox (data) {
+    console.log("TEST BOX");
+
+    //this is a conditional statement, holds the currently highlighted feature
+    var feature = data.properties ? data.properties : data.feature.properties;
+    d3.selectAll("."+feature.state)
+        .style("fill", "#1F7676");
+
+    //set the state name as the label title
+    var labelName = feature.state;
+    var labelAttribute;
+
+    //set up the text for the dynamic labels for the map
+    //labels should match the yearExpressed and the state of the law during that year
+
+    labelAttribute = yearExpressed+" Num Ex: "+feature[expressed][Number(yearExpressed)];
+
+    console.log(labelName);
+
+    var retrievelabel = d3.select(".map")
+        .append("div")
+        .attr("class", "retrievelabel")
+        .attr("id",feature.state+"label")
+
+    var labelTitle = d3.select(".retrievelabel")
+        .html(labelName)
+        .attr("class", "labelTitle");
+
+    var labelAttribute = d3.select(".labelTitle")
+        .append("div")
+        .html(labelAttribute)
+        .attr("class", "labelAttribute")
+}
+
+//creates dropdown menu
+function drawMenuInfo(colorize, yearExpressed) {
+    //creates year for map menu
+    yearExpressedText = d3.select('#clock')
+        .attr("x", 0)
+        .attr("y", 0)
+        .text(yearExpressed)
+        .style({'font-size':'36px', 'font-weight': 'strong'});
+}; //done with drawMenuInfo
 
 //vcr controls click events
-function animateMap(yearExpressed, colorize, yearExpressedText, data){
+function animateMap(yearExpressed, colorize, yearExpressedText, data) {
     //step backward functionality
     $(".stepBackward").click(function(){
         if (yearExpressed != yearArray[0]){
@@ -448,6 +486,7 @@ function highlight(data) {
     //set the state name as the label title
     var labelName = feature.abrev;
     var labelAttribute;
+
     //set up the text for the dynamic labels for the map
     //labels should match the yearExpressed and the state of the law during that year
     if (expressed == "Law") {
