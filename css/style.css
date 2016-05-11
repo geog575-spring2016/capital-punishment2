@@ -18,7 +18,7 @@ font-family: 'Droid Serif', serif;*/
 }
 
 .states {
-    stroke: #D3D3D3;
+    stroke: #E8E8E8;
     stroke-width: 0.25px;
     float: left;
 }
@@ -143,9 +143,6 @@ rect {
     font-family: 'Montserrat', sans-serif;
 }
 
-/* sequence buttons*/
-/*  ------ */
-
 .sequence-buttons {
   margin: 15px;
 
@@ -158,9 +155,6 @@ rect {
     width: 200px;
 }
 
-
-/* Overview CSS  */
-/* ------------  */
 
 #background {
     padding-top:0px;
@@ -181,19 +175,6 @@ rect {
     left: 100px;
 }
 
-.play {
-width: 80pt;
-background: white;
-border: none;
-color: grey;
-}
-.pause {
-width: 80pt;
-background: white;
-border: none;
-color: grey;
-
-}
 .stepForward {
 width: 80pt;
 background: #CCC;

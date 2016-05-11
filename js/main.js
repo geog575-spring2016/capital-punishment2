@@ -24,7 +24,6 @@ var playing = false; //default to not play on load
 
 /* **************************************************************
 
-NOTE * NOTE * NOTE * NOTE * NOTE * NOTE * NOTE * NOTE * NOTE * NOTE
 
 This variable is key and controls all values later on throughout
 // special attention here
