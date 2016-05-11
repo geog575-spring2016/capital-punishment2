@@ -38,7 +38,7 @@ p2 {
 }
 
 .page-header {
-    margin-top: 0px;
+    margin-top: -90px;
 }
 
 .main-menu {
@@ -114,13 +114,10 @@ rect {
     padding-left: 60px;
     padding-right: 60px;
     color: white;
-    background-color:  grey;
+    background-color: grey;
 }
 
 
-
-/*  Menu CSS */
-/*  ------ */
 .main-menu {
     margin-left: 12% !important;
     font-size: 20pt;
@@ -131,8 +128,6 @@ rect {
     border-style: none;
 }
 
-/*controls the legend text, but can't change size for some reason
-*/
 .title {
     font-family: 'Montserrat', sans-serif;
 }
@@ -147,11 +142,6 @@ rect {
     float: left;
     height:50px;
     width: 200px;
-}
-
-.background{
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 
@@ -179,12 +169,11 @@ border: none;
 color: #1F7676;
 margin-left: -100px;
 }
+
 #clock {
   color: #800000;
-  font-style: bold;
   size: 100pt;
-  height: 100px;
-  position: relative;
+  height: 300px;
   margin: 10px;
 }
 
@@ -193,19 +182,11 @@ margin-left: -100px;
     font-color: grey;
 }
 
-/* About CSS  */
-/* ---------  */
-.about {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-/* HTML General CSS  */
-/* ----------------  */
 
 strong {
-  font-size: 16pt;
-  font-family: 'Droid Serif', serif;
+  font-size: 33pt;
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
 
 }
 
@@ -222,15 +203,15 @@ h1 {
 
 h2 {
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Droid Serif', serif;;
 }
 
 h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Droid Serif', serif;;
 }
 
 body {
-    padding-top: 50px;
+    padding-top: 90px;
 }
 
 a:link {
@@ -243,10 +224,9 @@ a:visited {
 }
 
 a:hover {
-    color: grey;
+    color: #800000;
 }
 
 a:active {
     color: white;
-    text-decoration: none;
 }
