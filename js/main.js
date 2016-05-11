@@ -205,8 +205,6 @@ function setSymb (path, map, projection, data){
 
     if (!symbolSet) {
      circles = map.selectAll(".circles")
-        .on("mouseover", highlight)
-        .on("mouseout", dehighlight)
         .data(data)
         .enter()
         .append("circle")
@@ -218,7 +216,13 @@ function setSymb (path, map, projection, data){
             return projection([d.Longitude, d.Latitude])[0];
         }).attr("cy", function(d) {
             return projection([d.Longitude, d.Latitude])[1];
-        });
+        }).on("mouseover", function(d) {
+            // event listener, highlight bubbles
+            d3.select(this).attr("fill", '#1F7676');
+        }).on("mouseout", function() {
+            // 
+            d3.select(this).attr("fill", '#800000');
+        })
 
 
         // set parameter true to deactivate script
@@ -440,7 +444,7 @@ function highlight(data) {
     //this is a conditional statement, holds the currently highlighted feature
     var feature = data.properties ? data.properties : data.feature.properties;
     d3.selectAll("."+feature.abrev)
-        .style("fill", "pink");
+        .style("fill", "#1F7676");
 
     //set the state name as the label title
     var labelName = feature.abrev;
