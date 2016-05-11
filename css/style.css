@@ -23,13 +23,6 @@ font-family: 'Droid Serif', serif;*/
     float: left;
 }
 
-#clock {
-  color: #800000;
-  font-style: bold;
-  size: 100pt;
-  height: 100px;
-}
-
 p2 {
   float:bottom;
   width: 90%;
@@ -174,20 +167,30 @@ rect {
     top: 400px;
     left: 100px;
 }
-
 .stepForward {
 width: 80pt;
-background: #CCC;
+position: absolute;
+background: none;
 border: none;
 color: #1F7676;
+
 }
 .stepBackward {
+position: absolute;
 width: 80pt;
-background: #CCC;
+background: none;
 border: none;
 color: #1F7676;
+margin-left: -100px;
 }
-
+#clock {
+  color: #800000;
+  font-style: bold;
+  size: 100pt;
+  height: 100px;
+  position: relative;
+  margin: 10px;
+}
 
 #sources p{
     font-size: 12px;
