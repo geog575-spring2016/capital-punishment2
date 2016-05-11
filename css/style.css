@@ -63,19 +63,13 @@ rect {
 }
 
 .legendTitle {
-    font-size: 16pt;
-    font-style: bold;
+  font-family: 'Droid Serif', serif;
+
 }
 
 .legendLabels {
   font-size: 12pt;
-}
-
-.overlay-menu {
-    margin-top: 325px;
-    font-size: 12px;
-    font-family: 'Montserrat', sans-serif;
-    cursor: pointer;
+  font-family: 'Droid Serif', serif;
 }
 
 .menu-inset {
@@ -104,8 +98,6 @@ rect {
    font-weight:bold;
    font-size:20px;
    line-height:24px;
-   background-color: yellow;
-   color:grey;
    width:200px;
    padding:10px;
    margin-top: -600px;

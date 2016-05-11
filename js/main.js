@@ -339,7 +339,7 @@ function timeMapSequence(yr) {
     function createMenu(arrayX, arrayY, title, infotext, infolink) {
         var yArray = [40, 85, 130, 175, 220, 265];
 
-        var title = "Legal Status of Capital Punishment:";
+        var title = "Legal Status:";
 
         //creates menu boxes
         menuBox = d3.select(".menu-info")
