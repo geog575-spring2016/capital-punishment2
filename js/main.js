@@ -106,7 +106,6 @@ function setMap() {
 
 function callback(error, Law, allExecutions, continentalUS){
 
-    console.log(Law);
     //variable to store the continentalUS json with all attribute data
     joinedJson = topojson.feature(continentalUS, continentalUS.objects.states).features;
 
@@ -220,7 +219,7 @@ function setSymb (path, map, projection, data){
             // event listener, highlight bubbles
             d3.select(this).attr("fill", '#1F7676');
         }).on("mouseout", function() {
-            // 
+            // event listener, dehighlight - AKA return to standard color
             d3.select(this).attr("fill", '#800000');
         })
 
@@ -237,13 +236,16 @@ function updateSymb(data) {
     // create array to store all values for
     var domainArray = [];
     var selYear = yearExpressed;
+
     // typecasting number to string to access column in dataset
     selYear = '' + selYear;
-    console.log(selYear);
-    /* *** TESTING BOX END *** */
+
+    // iteration through all states to obtain ex. data for selected year
     for (var i=0; i<data.length; i++) {
+
+        // access code for execution data from csv
         var val = parseFloat(data[i][selYear]);
-        console.log(val);
+
         domainArray.push(val);
     };
 
