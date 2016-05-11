@@ -210,7 +210,7 @@ function setSymb (path, map, projection, data){
         .attr("class", function(d) {
             return "circles " + d.state;
         }).attr("fill", "#800000")
-        .attr('fill-opacity',0.5)
+        .attr('fill-opacity',0.4)
         .attr("cx", function(d) {
             return projection([d.Longitude, d.Latitude])[0];
         }).attr("cy", function(d) {
@@ -219,7 +219,7 @@ function setSymb (path, map, projection, data){
             // event listener, highlight bubbles
             d3.select(this).attr("fill", '#1F7676');
         }).on("mouseout", function() {
-            // 
+            //
             d3.select(this).attr("fill", '#800000');
         })
 
@@ -250,7 +250,7 @@ function updateSymb(data) {
         var radiusMax = Math.max.apply(Math, domainArray);
 
     var setRadius = d3.scale.sqrt()
-        .range([0, 60])
+        .range([0, 40])
         .domain([radiusMin, radiusMax]);
 
     //create a second svg element to hold the bar chart
@@ -444,7 +444,6 @@ function highlight(data) {
     var feature = data.properties ? data.properties : data.feature.properties;
     d3.selectAll("."+feature.abrev)
         .style("fill", "#1F7676");
-
     //set the state name as the label title
     var labelName = feature.abrev;
     var labelAttribute;
@@ -499,14 +498,6 @@ function setLabel(props) {
     var stateName = retrievelabel.append("div")
         .attr("class", "labelname")
         .html(props.abrev);
-};
-//set up function for label placement as mouse moves
-function moveLabel(){
-    //get width of label
-    var labelWidth = d3.select(".retrievelabel")
-        .width;
-
-    d3.select(".retrievelabel")
 };
 
 
