@@ -270,25 +270,30 @@ function updateSymb(data) {
 function animateMap(yearExpressed, colorize, yearExpressedText, data){
     //step backward functionality
     $(".stepBackward").click(function(){
-        if (yearExpressed <= yearArray[yearArray.length-1] && yearExpressed > yearArray[0]){
+        if (yearExpressed != yearArray[0]){
             yearExpressed--;
             changeAttribute(yearExpressed, colorize);
-            updateSymb(data);
         } else {
             yearExpressed = yearArray[yearArray.length-1];
             changeAttribute(yearExpressed, colorize);
         };
+
+        // update symbols to match year iteration
+        updateSymb(data);
+
     });
     //step forward
     $(".stepForward").click(function(){
         if (yearExpressed < yearArray[yearArray.length-1]){
             yearExpressed++;
             changeAttribute(yearExpressed, colorize);
-            updateSymb(data);
         } else {
             yearExpressed = yearArray[0];
             changeAttribute(yearExpressed, colorize);
         };
+
+        // update symbols to match year iteration
+        updateSymb(data);
     });
 }; //end animatemap
 
