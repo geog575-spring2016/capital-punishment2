@@ -1,16 +1,8 @@
-//bugs/issues to deal with:
-//1) determine how to label states separately (because now we're using the unique field = no spaces)
-//2) Get prop symbols to cycle through time using the play button
-//3) Get highlight/dehighlight to work on prop symbols
-//4) On highlight, show information box for each state
-//5) Get empty circles to show up on states with legal death penalty but no executions
-//6) It's a little monochromatic -- let's find a nice complementary color to the red
-
-//****GLOBAL VARIABLES****//
+//GLOBALS:
 var topicArray = ["Law",
                   "allExecutions"]; //the first item in this array will be the default
 
-//array for year's
+//array for years
 var yearArray = ["1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995","1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"];
 
 //choropleth global variables
@@ -21,17 +13,14 @@ var scale; //
 var colorize; //
 var playing = false; //default to not play on load
 
-
 /* **************************************************************
 This variable is key and controls all values later on throughout
 // special attention here
 ************************************************************** */
-
 var yearExpressedText; //variable to store year expressed text
 //array for law variable
 var arrayLaw = [ "Legal",
                  "Illegal"];
-
 var colorArrayLaw  = ["#DCDCDC","white"];
 //the map width is a function of window size
 var mapWidth = window.innerWidth * 0.7,
@@ -39,19 +28,14 @@ mapHeight = 600;
 var menuWidth = 200, menuHeight = 300;
 var menuInfoWidth = 250, menuInfoHeight = 100;
 var joinedJson;
-
-// Global variable declared for implenting the d3 map
 var map;
 var path;
 var projection;
-
-// Global variable declared for tracking the current year
+//stores the current year
 var yearExpressed;
-
 // Global variables controling 'setSymbol' function
 var circles; // variable holding circle objects
 var symbolSet = false; // variable activating function
-
 // Global variable storing data file
 var file;
 
@@ -211,52 +195,27 @@ function setSymb (path, map, projection, data){
         }).on("mouseover", function(d) {
             // event listener, highlight bubbles
             d3.select(this).attr("fill", '#1F7676');
-            infobox(data);
         }).on("mouseout", function() {
 
             d3.select(this).attr("fill", '#800000');
         })
-
-
         // set parameter true to deactivate script
         setSymb = true;
-
     }
     updateSymb(data);
 };
 
-function infobox(data) {
-    console.log("Yo");
-
-    var retrievelabel = d3.select(".map")
-        .append("div")
-        .attr("class", "retrievelabel")
-
-    var labelTitle = d3.select(".retrievelabel")
-        .attr("class", "labelTitle");
-
-    var labelAttribute = d3.select(".labelTitle")
-        .append("div")
-        .html(labelAttribute)
-        .attr("class", "labelAttribute")
-}
-
 
 function updateSymb(data) {
-
     // create array to store all values for
     var domainArray = [];
     var selYear = yearExpressed;
-
     // typecasting number to string to access column in dataset
     selYear = '' + selYear;
-
     // iteration through all states to obtain ex. data for selected year
     for (var i=0; i<data.length; i++) {
-
         // access code for execution data from csv
         var val = parseFloat(data[i][selYear]);
-
         domainArray.push(val);
     };
 
@@ -266,14 +225,13 @@ function updateSymb(data) {
     var setRadius = d3.scale.sqrt()
         .range([0, 40])
         .domain([radiusMin, radiusMax]);
-
     //create a second svg element to hold the bar chart
     var circleRadius= circles.attr("r", function(d){
             return setRadius(d[selYear]);
         });
 };
 
-    //creates dropdown menu
+    //adds clock
     function drawMenuInfo(colorize, yearExpressed){
         //creates year for map menu
         yearExpressedText = d3.select('#clock')
@@ -281,11 +239,10 @@ function updateSymb(data) {
             .attr("y", 0)
             .text(yearExpressed)
             .style({'font-size':'36px', 'font-weight': 'strong'});
-    }; //done with drawMenuInfo
+    }; 
 
-//vcr controls click events
 function animateMap(yearExpressed, colorize, yearExpressedText, data){
-    //step backward functionality
+    //take a step back now ya'll
     $(".stepBackward").click(function(){
         if (yearExpressed != yearArray[0]){
             yearExpressed--;
@@ -294,8 +251,7 @@ function animateMap(yearExpressed, colorize, yearExpressedText, data){
             yearExpressed = yearArray[yearArray.length-1];
             changeAttribute(yearExpressed, colorize);
         };
-
-        // update symbols to match year iteration
+        // update symbols to match year 
         updateSymb(data);
 
     });
@@ -313,7 +269,6 @@ function animateMap(yearExpressed, colorize, yearExpressedText, data){
         updateSymb(data);
     });
 }; //end animatemap
-
 
 //for play functionality
 function timeMapSequence(yr) {
@@ -356,7 +311,6 @@ function timeMapSequence(yr) {
     }; //end of changeAttribute
 
 
-
     //creates the legend
     function createMenu(arrayX, arrayY, title, infotext, infolink) {
         var yArray = [40, 85, 130, 175, 220, 265];
@@ -394,7 +348,7 @@ function timeMapSequence(yr) {
                     return arrayY[i];
                 });
         };
-        //creates legendLabels
+        //creates labels for legends
         var legendLabels = menuBox.selectAll(".legendLabels")
             .data(arrayX)
             .enter()
@@ -420,7 +374,6 @@ function timeMapSequence(yr) {
             currentColors = colorArrayLaw;
             currentArray = arrayLaw;
         } else if (expressed === "allExecutions") {
-        //here is where we call the function for the prop symbols that kai is working on... I think.
         };
         //ordinal scale = discrete, like names or categories (use for law variable)
         scale = d3.scale.ordinal()
@@ -492,40 +445,4 @@ function dehighlight(data) {
         .filter(".circles");
     var fillColor = selection.select("desc").text();
     selection.style("fill", fillColor);
-};
-
-function setLabel(props) {
-    //label content
-    var labelAttribute = "<h1>" + props[expressed] +
-        "</h1><b>" + expressed + "</b>";
-    //create info label div
-    var retrievelabel = d3.select("body")
-        .append("div")
-        .attr({
-            //set up class named retrievelabel to edit style
-            "class": "retrievelabel",
-            //use the attribute NAME to label the county
-            "id": props.abrev
-        })
-        .html(labelAttribute);
-
-    var stateName = retrievelabel.append("div")
-        .attr("class", "labelname")
-        .html(props.abrev);
-};
-
-
-// jQuery timer for play/pause
-var timer = $.timer(function() {
-        if (yearExpressed == yearArray[yearArray.length-1]){
-            yearExpressed = yearArray[0];
-        };
-        animateMap(yearExpressed, colorize, yearExpressedText);
-        timeMapSequence(yearExpressed);
-    });
-timer.set({ time : 800, autostart : false });
-
-// function stores data into 'file' variable
-function storeData(data) {
-    file = data;
 };
