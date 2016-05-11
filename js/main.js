@@ -204,8 +204,6 @@ function setSymb (path, map, projection, data){
 
     if (!symbolSet) {
      circles = map.selectAll(".circles")
-        .on("mouseover", highlight)
-        .on("mouseout", dehighlight)
         .data(data)
         .enter()
         .append("circle")
@@ -217,7 +215,13 @@ function setSymb (path, map, projection, data){
             return projection([d.Longitude, d.Latitude])[0];
         }).attr("cy", function(d) {
             return projection([d.Longitude, d.Latitude])[1];
-        });
+        }).on("mouseover", function(d) {
+            // event listener, highlight bubbles
+            d3.select(this).attr("fill", '#1F7676');
+        }).on("mouseout", function() {
+            // 
+            d3.select(this).attr("fill", '#800000');
+        })
 
 
         // set parameter true to deactivate script
@@ -269,25 +273,30 @@ function updateSymb(data) {
 function animateMap(yearExpressed, colorize, yearExpressedText, data){
     //step backward functionality
     $(".stepBackward").click(function(){
-        if (yearExpressed <= yearArray[yearArray.length-1] && yearExpressed > yearArray[0]){
+        if (yearExpressed != yearArray[0]){
             yearExpressed--;
             changeAttribute(yearExpressed, colorize);
-            updateSymb(data);
         } else {
             yearExpressed = yearArray[yearArray.length-1];
             changeAttribute(yearExpressed, colorize);
         };
+
+        // update symbols to match year iteration
+        updateSymb(data);
+
     });
     //step forward
     $(".stepForward").click(function(){
         if (yearExpressed < yearArray[yearArray.length-1]){
             yearExpressed++;
             changeAttribute(yearExpressed, colorize);
-            updateSymb(data);
         } else {
             yearExpressed = yearArray[0];
             changeAttribute(yearExpressed, colorize);
         };
+
+        // update symbols to match year iteration
+        updateSymb(data);
     });
 }; //end animatemap
 
@@ -434,7 +443,7 @@ function highlight(data) {
     //this is a conditional statement, holds the currently highlighted feature
     var feature = data.properties ? data.properties : data.feature.properties;
     d3.selectAll("."+feature.abrev)
-        .style("fill", "pink");
+        .style("fill", "#1F7676");
 
     //set the state name as the label title
     var labelName = feature.abrev;
