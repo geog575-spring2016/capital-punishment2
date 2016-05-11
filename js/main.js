@@ -211,6 +211,7 @@ function setSymb (path, map, projection, data){
         }).on("mouseover", function(d) {
             // event listener, highlight bubbles
             d3.select(this).attr("fill", '#1F7676');
+            infobox(data);
         }).on("mouseout", function() {
 
             d3.select(this).attr("fill", '#800000');
@@ -223,6 +224,23 @@ function setSymb (path, map, projection, data){
     }
     updateSymb(data);
 };
+
+function infobox(data) {
+    console.log("Yo");
+
+    var retrievelabel = d3.select(".map")
+        .append("div")
+        .attr("class", "retrievelabel")
+
+    var labelTitle = d3.select(".retrievelabel")
+        .attr("class", "labelTitle");
+
+    var labelAttribute = d3.select(".labelTitle")
+        .append("div")
+        .html(labelAttribute)
+        .attr("class", "labelAttribute")
+}
+
 
 function updateSymb(data) {
 

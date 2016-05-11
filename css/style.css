@@ -80,10 +80,9 @@ rect {
 
 .retrieveLabel {
     position: absolute;
-    padding: 10px;
-    float:right;
+    float:left;
     display:inline-block;
-    margin-right:200px;
+    background: red;
 }
 
 .labelTitle {
